@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'erb2haml'
+gem 'devise'
 
 group :development, :test do
 
