@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'erb2haml'
+gem 'devise'
 
 group :development, :test do
 
@@ -36,3 +37,6 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "carrierwave"
+gem "mini_magick"

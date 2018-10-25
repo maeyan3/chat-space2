@@ -1,0 +1,8 @@
+.messagebox{'data-id': message.id}
+  .user-name
+    = message.user.name
+  .post-time
+    = message.created_at
+  .messagebox__text
+    = message.content
+= image_tag message.image.url class: 'messagebox__image' if message.image.present?
