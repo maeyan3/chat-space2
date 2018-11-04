@@ -43,11 +43,12 @@ group :development do
   gem 'hirb'
 end
 
+group :production do
+  gem 'unicorn'
+end
+
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "carrierwave"
 gem "mini_magick"
-
-group :production do
-  gem 'unicorn'
-end
