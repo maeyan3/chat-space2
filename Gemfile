@@ -7,7 +7,7 @@ end
 
 
 gem 'rails', '~> 5.0.1'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'mysql2', '0.3.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
+  gem 'pry-rails'
 end
 
 group :development do

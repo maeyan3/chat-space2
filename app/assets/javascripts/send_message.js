@@ -38,7 +38,7 @@ $(function(){
     })
     .done(function(data){
       if (data.content == null && data.image == null){
-        alert('error');
+        // alert('error');
         $('.form__submit').attr('disabled', false);
         $('.new_message')[0].reset();
       }else{
