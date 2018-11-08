@@ -1,6 +1,6 @@
 $(function(){
   function buildHTML(message){
-    var content = message.content ?  `${ message.content }` : ''
+    var content = message.content ?  `${ message.content }` : '';
     var img = message.image ? `<img src= ${message.image}>` : "";
     var html = `<div class= 'messagebox' data-id= ${message.id}>
                   <div class=user-name>
@@ -9,19 +9,45 @@ $(function(){
                   <div class=post-time>
                     ${message.created_at}
                   </div>
-                  <div class=messagebox__list>
-                    <div class=messagebox__text>
+                  <div class=messagebox__text>
                     ${content}
-                    </div>
-                    ${ img }
                   </div>
-                </div>`
+                </div>
+                ${ img }`
     return html;
   }
 
   function scroll(){
     $('.message__main').animate({scrollTop: $('.message__main')[0].scrollHeight},'fast');
   }
+
+  setInterval(function(){
+    if (window.location.pathname.match(/\/groups\/\d+\/messages/)) {
+      if($('.message__main')[0]){
+        var message_id = $('.messagebox:last').data('id') || 0;
+      }
+      $.ajax({
+       url: location.pathname,
+       type: 'GET',
+       data: {
+        message: { id: message_id }
+       },
+       dataType: 'json'
+      })
+      .done(function(messages) {
+        if (messages.length > 0){
+          messages.forEach(function(message){
+            var html = buildHTML(message);
+            $('.message__main').append(html)
+            scroll();
+          });
+        }
+      });
+    }
+    else {
+      clearInterval(interval)
+    }
+  }, 5000);
 
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -40,13 +66,12 @@ $(function(){
       if (data.content == null && data.image == null){
         // alert('error');
         $('.form__submit').attr('disabled', false);
-        $('.new_message')[0].reset();
       }else{
         var html = buildHTML(data);
-        $('.message__main').append(html)
+        $('.message__main').append(html);
         $('.form__submit').attr('disabled', false);
-        $('.new_message')[0].reset();
-        scroll()
+        scroll();
+        $('#message_content').val("");
       }
     })
     .fail(function() {
@@ -56,35 +81,5 @@ $(function(){
     })
   })
 
-  $(function(){
-    setInterval(update, 5000);
-  });
 
-   function update(){
-    if (window.location.pathname.match(/\/groups\/\d+\/messages/)) {
-      if($('.message__main')[0]){
-        var message_id = $('.messagebox:last').data('id') || 0;
-      }
-      $.ajax({
-       url: location.pathname,
-       type: 'GET',
-       data: {
-        message: { id: message_id }
-       },
-       dataType: 'json'
-      })
-      .always(function(messages){
-        if (messages.length > 0){
-          messages.forEach(function(message){
-            var html = buildHTML(message);
-            $('.message__main').append(html)
-            scroll();
-          });
-        }
-      });
-    }
-    else {
-      clearInterval(interval)
-    }
-  }
 });
