@@ -71,14 +71,14 @@ $(function(){
         $('.message__main').append(html);
         $('.form__submit').attr('disabled', false);
         scroll();
-        // $('#new_message').val("");
+        $('#new_message').val("");
         $('#new_message')[0].reset();
       }
     })
     .fail(function() {
       alert('error');
       $('.form__submit').attr('disabled', false);
-      // $('.new_message')[0].reset();
+      $('.new_message')[0].reset();
     })
   })
 
